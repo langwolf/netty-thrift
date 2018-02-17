@@ -50,7 +50,7 @@ import io.netty.channel.ChannelHandler;
 public abstract class ThriftServerDefBuilderBase<T extends ThriftServerDefBuilderBase<T>> {
 	private static final AtomicInteger ID = new AtomicInteger(1);
 
-	private String name = "netty5thrift-" + ID.getAndIncrement();
+	private String name = "nettythrift-" + ID.getAndIncrement();
 	private int serverPort = 8081;
 	private int maxFrameSize = MAX_FRAME_SIZE;
 	private int maxConnections;
@@ -222,8 +222,6 @@ public abstract class ThriftServerDefBuilderBase<T extends ThriftServerDefBuilde
 
 		checkState(maxConnections >= 0, "maxConnections should be 0 (for unlimited) or positive");
 		if (executor == null) {
-//			executor = new DefaultExecutorServiceFactory("NettyThrift")
-//					.newExecutorService(Runtime.getRuntime().availableProcessors() + 1);
 			executor = new ThreadPoolExecutor(
 					  Runtime.getRuntime().availableProcessors(), Runtime.getRuntime()
 					          .availableProcessors() + 3, 1, TimeUnit.MINUTES,
@@ -252,8 +250,6 @@ public abstract class ThriftServerDefBuilderBase<T extends ThriftServerDefBuilde
 
 		checkState(maxConnections >= 0, "maxConnections should be 0 (for unlimited) or positive");
 		if (executor == null) {
-//			executor = new DefaultExecutorServiceFactory("NettyThrift")
-//					.newExecutorService(Runtime.getRuntime().availableProcessors() + 1);
 			executor = new ThreadPoolExecutor(
 					  Runtime.getRuntime().availableProcessors(), Runtime.getRuntime()
 					          .availableProcessors() + 3, 1, TimeUnit.MINUTES,
@@ -278,7 +274,6 @@ public abstract class ThriftServerDefBuilderBase<T extends ThriftServerDefBuilde
 						maxFrameSize, maxConnections, queuedResponseLimit,
 						nettyProcessorFactory, contextHandlerInstaller,
 						tmp.getValue(), 
-//						processorFactory, 
 						executor, clientIdleTimeout,
 						protocolFactorySelectorFactory, httpResourceHandler, voidMethodDirectReturn, httpHandlerFactory,
 						trafficForecastFactory, logicExecutionStatistics));

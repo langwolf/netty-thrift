@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lioncorp.nettythrift.core.ThriftServerDef;
+import com.lioncorp.nettythrift.core.ThriftServerDefBuilderBase;
 import com.lioncorp.nettythrift.transport.TNettyThriftServerTransport;
 
 /**
@@ -67,7 +68,7 @@ public class TNettyThriftServer extends TServer {
 
 //    private ThriftServerDef[] serverDefs;
 
-    private static final int DEFAULT_MAX_READ_LENGTH = Integer.MAX_VALUE;
+//    private static final int DEFAULT_MAX_READ_LENGTH = Integer.MAX_VALUE;
 
     public TNettyThriftServer(Args args) {
         super(args);
@@ -77,15 +78,15 @@ public class TNettyThriftServer extends TServer {
     @Override
     public void serve() {
         int maxReadSize = args.getMaxReadBuffer();
-        if (0 >= maxReadSize) {
-            maxReadSize = DEFAULT_MAX_READ_LENGTH;
+        if (maxReadSize <= 0) {
+            maxReadSize = ThriftServerDefBuilderBase.MAX_FRAME_SIZE;
         }
-        args.setMaxReadBuffer(maxReadSize);   
         long clientTimeout = args.getClientTimeout();
         clientTimeout = (clientTimeout <= 0)? TimeUnit.SECONDS.toMillis(15) : clientTimeout;
 		ThriftServerDef[] serverDefs = ThriftServerDef.newBuilder()
 				.listen(args.getPort())
 				.withProcessors(args.getMap())
+				.limitFrameSizeTo(maxReadSize)
 //				.using(Executors.newCachedThreadPool())
 				.clientIdleTimeout(clientTimeout)
 				.builds();
