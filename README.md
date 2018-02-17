@@ -18,7 +18,6 @@ final TServer nettyServer = new TNettyThriftServer(nettyArg);
   new Thread(()->{
 	  nettyServer.serve();
 	}).start();
-    
 ```
 OR
 ```Java
