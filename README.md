@@ -1,6 +1,7 @@
 Netty-Thrift
 =====
 Thrift on Netty
+* jdk1.8, netty4.1.20.Final, thrift0.9.3
 * base [nettythrift](https://github.com/houkx/nettythrift) and [nifty](https://github.com/facebook/nifty)
 * add Multi-service mode
 
@@ -14,13 +15,9 @@ TNettyThriftServer.Args nettyArg = new TNettyThriftServer.Args(8090);
 nettyArg.setMaxReadBuffer(1024 * 100);
 nettyArg.setMap(map);
 final TServer nettyServer = new TNettyThriftServer(nettyArg);
-  new Thread(new Runnable() {
-    @Override
-    public void run() {
-      nettyServer.serve();
-    }
-  }).start();
-    
+  new Thread(()->{
+	  nettyServer.serve();
+	}).start();
 ```
 OR
 ```Java
