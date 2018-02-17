@@ -16,7 +16,7 @@ public class TestServer {
 		map.put("test", new TCalculator.Processor<TCalculator.Iface>(new CalcIfaceImpl()));
 		map.put("test2", new TCalculator.Processor<TCalculator.Iface>(new CalcIfaceImpl()));
 		com.lioncorp.nettythrift.server.TNettyThriftServer.Args nettyArg = new TNettyThriftServer.Args(8090);
-		nettyArg.setMaxReadBuffer(1024 * 100);
+//		nettyArg.setMaxReadBuffer(1024 * 100);
 		nettyArg.setMap(map);
 		final TServer nettyServer = new TNettyThriftServer(nettyArg);
 
