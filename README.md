@@ -1,8 +1,11 @@
-# Netty-thrift
+Netty-Thrift
+=====
 Thrift on Netty
 * base [nettythrift](https://github.com/houkx/nettythrift) and [nifty](https://github.com/facebook/nifty)
 * add Multi-service mode
-# Example
+
+Example
+=====
 ```Java
 Map<String, TBaseProcessor<?>> map = Maps.newHashMap();
 map.put("test", new TCalculator.Processor<TCalculator.Iface>(new CalcIfaceImpl()));	
