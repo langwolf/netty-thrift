@@ -2,7 +2,7 @@ Netty-Thrift
 =====
 Thrift on Netty
 * jdk1.8, netty4.1.20.Final, thrift0.9.3
-* base [nettythrift](https://github.com/houkx/nettythrift) and [nifty](https://github.com/facebook/nifty)
+* based on [nettythrift](https://github.com/houkx/nettythrift) and [nifty](https://github.com/facebook/nifty)
 * add Multi-service mode
 
 Example
