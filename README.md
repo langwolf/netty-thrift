@@ -15,12 +15,9 @@ TNettyThriftServer.Args nettyArg = new TNettyThriftServer.Args(8090);
 nettyArg.setMaxReadBuffer(1024 * 100);
 nettyArg.setMap(map);
 final TServer nettyServer = new TNettyThriftServer(nettyArg);
-  new Thread(new Runnable() {
-    @Override
-    public void run() {
-      nettyServer.serve();
-    }
-  }).start();
+  new Thread(()->{
+	  nettyServer.serve();
+	}).start();
     
 ```
 OR
