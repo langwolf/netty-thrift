@@ -51,13 +51,13 @@ public class ThriftServerDef {
 	public final int maxFrameSize;
 	public final int maxConnections;
 	public final int queuedResponseLimit;
-	public final NettyProcessor nettyProcessor;
+	private final NettyProcessor nettyProcessor;
 	public final ChannelHandler codecInstaller;
 	@SuppressWarnings("rawtypes")
 	public final Map<String, ProcessFunction<?, ? extends TBase>> processMap;
 	public final Object iface;
 	public final ExecutorService executor;
-	public final long clientIdleTimeout;
+	private final long clientIdleTimeout;
 	public final ProtocolFactorySelector protocolFactorySelector;
 	public final HttpResourceHandler httpResourceHandler;
 	public final boolean voidMethodDirectReturn;
@@ -173,6 +173,14 @@ public class ThriftServerDef {
 			return Arrays.binarySearch(voidMethodHashes, methodName.hashCode()) >= 0;
 		}
 		return false;
+	}
+
+	public NettyProcessor getNettyProcessor() {
+		return nettyProcessor;
+	}
+
+	public long getClientIdleTimeout() {
+		return clientIdleTimeout;
 	}
 
 	public static ThriftServerDefBuilder newBuilder() {

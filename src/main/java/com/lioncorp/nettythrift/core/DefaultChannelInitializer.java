@@ -22,13 +22,7 @@ public class DefaultChannelInitializer<CHANNEL extends Channel> extends ChannelI
 		this.serverDef = serverDef;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * io.netty5thrift.core.ContextHandlerInstaller#installHandlers(io.netty.
-	 * channel.ChannelPipeline)
-	 */
+
 	@Override
 	protected void initChannel(CHANNEL channel) throws Exception {
 		ChannelPipeline cp = channel.pipeline();
@@ -36,7 +30,7 @@ public class DefaultChannelInitializer<CHANNEL extends Channel> extends ChannelI
 		cp.addLast("HttpDispatcher", new HttpCodecDispatcher(serverDef));
 		cp.addLast("ThriftMessageDecoder", new ThriftMessageDecoder(serverDef, null));
 		cp.addLast("ThriftMessageEncoder", new ThriftMessageEncoder(serverDef));
-		long idles = serverDef.clientIdleTimeout;
+		long idles = serverDef.getClientIdleTimeout();
 		if (idles > 0) {
 			cp.addLast("IdleHandler", new IdleDisconnectHandler(idles, TimeUnit.MILLISECONDS));
 		}

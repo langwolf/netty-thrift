@@ -77,7 +77,7 @@ public class MultiThriftMessageEncoder extends SimpleChannelInboundHandler<Thrif
 					msg.type, 
 					msg.seqid);
 			TProtocol in = new StoredMessageProtocol(protocol, standardMessage);
-			serverDef.nettyProcessor.process(ctx, in, protocol,
+			serverDef.getNettyProcessor().process(ctx, in, protocol,
 					new DefaultWriterListener(message, transport, ctx,
 							serverDef));
 		} catch (Throwable ex) {

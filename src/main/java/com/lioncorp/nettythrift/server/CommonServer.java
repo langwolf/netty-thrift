@@ -41,7 +41,6 @@ public class CommonServer implements java.io.Closeable {
 					.childHandler(channelInitializer);
 			f = b.bind(port).sync();
 			logger.info("Server started and listen on port:{}", port);
-			System.out.println("Server started and listen on port:"+port);
 			f.channel().closeFuture().sync();
 		} finally {
 			close_();
@@ -49,7 +48,7 @@ public class CommonServer implements java.io.Closeable {
 	}
 
 	private void close_() {
-		logger.info("**** try shutdown NioEventLoopGroups.");
+		logger.info("try shutdown NioEventLoopGroups.");
 		try {
 			bossGroup.shutdownGracefully().sync();
 		} catch (InterruptedException e) {

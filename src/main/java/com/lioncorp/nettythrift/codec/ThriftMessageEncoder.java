@@ -35,7 +35,7 @@ public class ThriftMessageEncoder extends SimpleChannelInboundHandler<ThriftMess
 			TNettyTransport transport = new TNettyTransport(ctx.channel(), buffer);
 			TProtocolFactory protocolFactory = message.getProtocolFactory();
 			TProtocol protocol = protocolFactory.getProtocol(transport);
-			serverDef.nettyProcessor.process(ctx, protocol, protocol,
+			serverDef.getNettyProcessor().process(ctx, protocol, protocol,
 					new DefaultWriterListener(message, transport, ctx, serverDef));
 		} catch (Throwable ex) {
 			int refCount = buffer.refCnt();
